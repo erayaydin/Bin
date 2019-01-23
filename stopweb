@@ -1,0 +1,11 @@
+#!/bin/sh
+
+stop_service() {
+    echo "Stopping $1 service..."
+    sudo systemctl stop $1
+}
+
+stop_service nginx
+stop_service mariadb
+stop_service redis
+stop_service php-fpm

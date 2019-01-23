@@ -1,0 +1,39 @@
+#!/bin/bash
+
+TEMP="$(mktemp -t screencast-XXXXXX).mkv"
+PALETTETEMP="$(mktemp -t palette-XXXXXX).png"
+
+# Default output folder is current working directory
+OUTPUTFOLDER="$PWD"
+
+# Determinate output folder with testing
+if [ -d "$HOME/Pictures/Screencasts" ]; then
+    OUTPUTFOLDER="$HOME/Pictures/Screencasts"
+fi
+
+if [ -d "$HOME/Screencasts" ]; then
+    OUTPUTFOLDER="$HOME/Screencasts"
+fi
+
+read -r SCREEN_X SCREEN_Y RECORD_W RECORD_H < <(slop -f "%x %y %w %h")
+
+OUTPUTFILE="$OUTPUTFOLDER/$(date +%F_%H-%M-%S)"
+
+ffmpeg -f x11grab -s "$RECORD_W"x"$RECORD_H" -i :0.0+$SCREEN_X,$SCREEN_Y "$TEMP"
+
+notify-send "Record has been finished"
+
+notify-send "Generating GIF file"
+
+ffmpeg -y -i "$TEMP" -vf fps=10,palettegen $PALETTETEMP
+ffmpeg -i "$TEMP" -i $PALETTETEMP -filter_complex "paletteuse" $OUTPUTFILE.gif
+
+rm -f '$PALETTETEMP'
+
+mv $TEMP $OUTPUTFILE.mkv
+
+SIZE=$(du -h $OUTPUTFILE.gif | awk '{print $1}')
+notify-send "Record has been saved to $OUTPUTFILE with $SIZE size"
+
+feh $OUTPUTFILE.gif
+
