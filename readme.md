@@ -90,10 +90,24 @@ Starts web development services (`nginx`,`mariadb`,`redis`,`php-fpm`)
 
 Stops web development services (`nginx`,`mariadb`,`redis`,`php-fpm`)
 
+## WIP:Battery State
+
+> **Work In Progress**
+
+Creates notification about charging and discharging on battery.
+
+## WIP:SSH Send Term
+
+> **Work In Progress**
+
+Send current term info to remote server.
+
 # Todo
 
 - Remove `Start Web` and `Stop Web` utilities and create an extendible `Toggle Web` script.
 - Feedback changes to user on `Keyboard Backlight` utility.
 - Customization feature for `Feh Background` utility.
 - Add support for another region selection (`slop`) on `Screencast` utility.
+- Finish "Battery State" program.
+- Finish "SSH Send Term" program.
 

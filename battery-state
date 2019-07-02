@@ -1,0 +1,33 @@
+#!/bin/bash
+
+DISCHARGING_TEXT="Battery in discharging"
+
+DANGER_TEXT="Battery power in danger level!"
+CRITICAL_TEXT="Battery power in critical level!"
+
+SAFE=30
+DANGER=15
+CRITICAL=5
+
+SAFE_EXIT=1
+export DISPLAY=:0.0
+
+currBattery=$(acpi -b | grep -Eo "[0-9]+%" | grep -Eo "[0-9]+")
+
+if [ ! -f /tmp/battery-state ]; then
+    echo "First time of running"
+
+    touch /tmp/battery-state
+
+    if [[ $(acpi -b | grep -i discharging) ]]; then
+        echo "DISCHARGING"
+        notify-send "$DISCHARGING_TEXT"
+        echo "discharge" > /tmp/battery-state
+    else
+        echo "CHARGING"
+        echo "charge" > /tmp/battery-state
+        echo "$currBattery" > /tmp/battery-state-curr
+        echo "$(date +%s)" > /tmp/battery-state-last
+    fi
+
+fi
