@@ -102,6 +102,10 @@ Creates notification about charging and discharging on battery.
 
 Send current term info to remote server.
 
+## WIP:Unified Remote Server
+
+Toggle unified remote server with XDG base directory support.
+
 # Todo
 
 - Remove `Start Web` and `Stop Web` utilities and create an extendible `Toggle Web` script.
@@ -110,4 +114,4 @@ Send current term info to remote server.
 - Add support for another region selection (`slop`) on `Screencast` utility.
 - Finish "Battery State" program.
 - Finish "SSH Send Term" program.
-
+- Fix `urserver` XDG directory support problem.
