@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xwinwrap -fs -fdt -ni -b -nf -un -ov -o 1.0 -debug -- mpv -wid WID --loop --no-audio ~/Videos/Wallpaper/horde.mpg
