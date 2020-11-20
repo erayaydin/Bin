@@ -5,7 +5,7 @@ start_service() {
     sudo systemctl start $1
 }
 
-start_service nginx
 start_service mariadb
-start_service redis
 start_service php-fpm
+start_service redis
+start_service nginx
