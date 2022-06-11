@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+WAIT_TIMEOUT=10
+WAIT_LONG_TIMEOUT=1800
+
+get_updates() {
+    UPDATES=$(checkupdates 2>/dev/null | wc -l);
+}
+
+while true; do
+    get_updates
+    echo $UPDATES;
+    if (( UPDATES > 0 )); then
+	    sleep $WAIT_TIMEOUT
+    else
+	    sleep $WAIT_LONG_TIMEOUT
+    fi
+done
+
