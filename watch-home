@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+inotifywait -m ~ -e create |
+  while read directory action file; do
+    if [[ $action == "CREATE,ISDIR" ]]; then
+      notify-send -a 'WATCH HOME' "$file directory created in the home!"
+    elif [[ $action == "CREATE" ]]; then
+      notify-send -a 'WATCH HOME' "$file file created in the home!"
+    fi
+  done
